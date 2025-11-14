@@ -4,9 +4,10 @@
     box-sizing: border-box;
 }
 
+/* Mobile-first casual gradient background before click */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -19,6 +20,8 @@ body {
     text-align: center;
     position: relative;
     z-index: 2;
+    padding: 16px;
+    width: 100%;
 }
 
 .background-overlay {
@@ -27,13 +30,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('apology.HEIC'); 
+    /* NOTE: HEIC is not widely supported on mobile browsers. Prefer JPG/PNG. */
+    background-image: url('apology.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 0.8s ease;
 }
 
 .background-overlay.show {
@@ -45,36 +49,33 @@ body {
 }
 
 .start-button {
-    background: #667eea;
+    background: #1f2937;
     color: white;
     border: none;
-    padding: 20px 50px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 50px;
+    padding: 16px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 9999px;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.5s ease;
     animation: pulse 2s infinite;
 }
 
 .start-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .apology-container {
     color: white;
-    animation: fadeInScale 1.5s ease forwards;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.45);
+    animation: fadeInScale 1s ease forwards;
 }
 
 .apology-container.hidden {
@@ -82,137 +83,42 @@ body {
 }
 
 @keyframes fadeInScale {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
 }
 
-.heart {
-    width: 80px;
-    height: 80px;
-    background: #ff6b6b;
-    margin: 0 auto 30px;
-    position: relative;
-    transform: rotate(-45deg);
-    animation: heartbeat 1.5s infinite;
-}
-
-.heart:before,
-.heart:after {
-    content: "";
-    width: 80px;
-    height: 80px;
-    background: #ff6b6b;
-    border-radius: 50%;
-    position: absolute;
-}
-
-.heart:before {
-    top: -40px;
-    left: 0;
-}
-
-.heart:after {
-    left: 40px;
-    top: 0;
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: rotate(-45deg) scale(1);
-    }
-    25% {
-        transform: rotate(-45deg) scale(1.1);
-    }
-    50% {
-        transform: rotate(-45deg) scale(1);
-    }
-}
-
-.heart {
-    width: 80px;
-    height: 80px;
-    background: #ff6b6b;
-    margin: 0 auto 30px;
-    position: relative;
-    transform: rotate(-45deg);
-    animation: heartbeat 1.5s infinite;
-}
-
-.heart:before,
-.heart:after {
-    content: "";
-    width: 80px;
-    height: 80px;
-    background: #ff6b6b;
-    border-radius: 50%;
-    position: absolute;
-}
-
-.heart:before {
-    top: -40px;
-    left: 0;
-}
-
-.heart:after {
-    left: 40px;
-    top: 0;
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: rotate(-45deg) scale(1);
-    }
-    25% {
-        transform: rotate(-45deg) scale(1.1);
-    }
-    50% {
-        transform: rotate(-45deg) scale(1);
-    }
-}
+/* Remove heart styles entirely if present */
+/* .heart { display:none !important; } */
 
 .apology-text {
-    font-size: 56px;
-    margin-bottom: 30px;
-    animation: fadeInUp 1s ease 0.3s backwards;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 34px;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .message {
-    font-size: 20px;
-    line-height: 1.8;
-    max-width: 90%;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 600px;
     margin: 0 auto;
-    animation: fadeInUp 1s ease 0.6s backwards;
-    padding: 0 20px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease 0.35s backwards;
+    padding: 0 16px;
 }
 
 .stars {
-    margin-top: 40px;
-    animation: fadeInUp 1s ease 0.9s backwards;
+    margin-top: 24px;
+    animation: fadeInUp 0.8s ease 0.5s backwards;
 }
 
 .star {
-    font-size: 40px;
+    font-size: 28px;
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 6px;
     animation: twinkle 1.5s infinite;
 }
 
@@ -223,12 +129,18 @@ body {
 .star:nth-child(5) { animation-delay: 0.8s; }
 
 @keyframes twinkle {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(0.8);
-    }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.85); }
+}
+
+/* Small phones */
+@media (max-width: 360px) {
+    .apology-text { font-size: 28px; }
+    .message { font-size: 15px; }
+}
+
+/* Larger phones / phablets */
+@media (min-width: 428px) {
+    .apology-text { font-size: 40px; }
+    .message { font-size: 18px; }
 }
